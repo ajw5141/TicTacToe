@@ -6,154 +6,111 @@ namespace TicTacToe
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Welcome to Tic-Tac-Toe!!!\n"+
+            "\nComing soon...\n" +
+            // positions to align with numpad: DONE
+            "change statement after repeatLoop=True\n"+
+            "collison for non-empty spaces\n"+ 
+            "randomizer for who goes first\n"+
+            "add win conditions\n"+
+            "add A.I. and program it to be 'smart'\n"+
+            "add score tally for players\n"+
+            "ask players if they want to play best of format or until they are ready to stop\n");
 
 
-            /*  Console.WriteLine("Welcome to Tic-Tac-Toe!");
-              Console.WriteLine("");
-              Console.WriteLine(" ___|___|___ ");
-              Console.WriteLine(" ___|___|___ ");
-              Console.WriteLine("    |   |    ");
-              Console.WriteLine("");
-
-              int[,] myArray = new int[3, 3];
-              myArray[2,2]  = 5;
-              Console.WriteLine(myArray[2, 2]); */
-
-
-
-            /*  
-               */
-
-            PrintBoard();
 
             string[] pos = new string[9] { " ", " ", " ", " ", " ", " ", " ", " ", " " };
-            pos[0] = "X";
-            pos[3] = "O";
-            pos[5] = "!";
-            int x;
-            for (x = 0; x < pos.Length; x++)
-                Console.WriteLine("Value: " + pos[x]);
+            Console.WriteLine("Player 1: What is your name?");
+            string Player1 = (Console.ReadLine());
+            Console.WriteLine("\nPlayer 2: What is your name?");
+            string Player2 = (Console.ReadLine());
 
-            /* for (x = 0; x < pos.Length; x++)
-                 ReceiverMethod(pos[x]);
-                 Console.Read(); */
-
-            ReceiverMethod(pos[3]);
-            Console.Read();
-
-
-            Console.ReadLine();
-            
-         /*   CreateGrid();
-            Console.ReadLine();
-
-            }
-
-        static void CreateGrid()
-        {
-/*
-            int width = 4;
-            int height = 4;
-
-            string[,] grid = new string[width, height];
-            grid[1, 1] = "x";
-            grid[1, 2] = "x";
-            grid[1, 3] = "x";
-            grid[2, 1] = "x";
-            grid[2, 2] = "x";
-            grid[2, 3] = "x";
-            grid[3, 1] = "x";
-            grid[3, 2] = "x";
-            grid[3, 3] = "x";
-
-
-            for (int x = 0; x < width; x++)
+            string playerMark = "X";
+            for (int turn = 1; turn <= 9; turn++)
             {
-                for (int y = 0; y < height; y++)
+                if (turn % 2 == 0)
                 {
-                    Console.Write(grid[x, y] + "|");
+                    string CurrentPlayer = Player2;
+                    playerMark = "O";
+                    UserInput(pos, playerMark, CurrentPlayer, turn);
+
                 }
-                Console.WriteLine();
+                else
+                {
+                    string CurrentPlayer = Player1;
+                    playerMark = "X";
+                    UserInput(pos, playerMark, CurrentPlayer, turn);
+
+                }
             }
-*/
         }
-        /*
-        static string GetPos(int PosNum)
-        {
-            string boardPos;
 
-            switch (PosNum)
+
+        static void UserInput(string[] pos, string playerMark, string CurrentPlayer, int turn)
+        {
+
+
+
+            
+            bool repeatLoop;
+            Console.WriteLine("\nTurn: " + turn + "\nYo " + CurrentPlayer + ", pick a position for your " + playerMark + ", \ntype 'help' to see which position is which.");
+            do
             {
+                repeatLoop = false;
+                string answer = (Console.ReadLine());
+                
+                if (answer == "1") { pos[0] = playerMark; }
+                else if (answer == "2") { pos[1] = playerMark; }
+                else if (answer == "3") { pos[2] = playerMark; }
+                else if (answer == "4") { pos[3] = playerMark; }
+                else if (answer == "5") { pos[4] = playerMark; }
+                else if (answer == "6") { pos[5] = playerMark; }
+                else if (answer == "7") { pos[6] = playerMark; }
+                else if (answer == "8") { pos[7] = playerMark; }
+                else if (answer == "9") { pos[8] = playerMark; }
+                else if (answer == "help")
+                {
+                    PositionKey();
+                    repeatLoop = true;
+                    Console.WriteLine("Ok, now pick a position for your " + playerMark);
+                }
+                else { Console.WriteLine("\ninvalid position, try again"); repeatLoop = true; }
 
-                case 0:
-                        boardPos = "not a board position";
-                        break;
+            } while (repeatLoop == true);
 
-                    case 1:
-                        boardPos = myArray[0, 0];
-                        break;
-
-                    case 2:
-                        boardPos = myArray[0, 1];
-                        break;
-
-                    case 3:
-                        boardPos = myArray[0, 2];
-                        break;
-
-                    case 4:
-                        boardPos = myArray[1, 0];
-                        break;
-
-                    case 5:
-                        boardPos = myArray[1, 1];
-                        break;
-
-                    case 6:
-                        boardPos = myArray[1, 2];
-                        break;
-
-                    case 7:
-                        boardPos = myArray[2, 0];
-                        break;
-
-                    case 8:
-                        boardPos = myArray[2, 1];
-                        break;
-
-                    case 9:
-                        boardPos = myArray[2, 2];
-                        break;
-        */
-
-static void ReceiverMethod(string oneVal)
-        {
-            Console.WriteLine("Value in the method: " + oneVal);
+            PrintBoard(pos);
         }
-            
 
-        static void PrintBoard()
+        static void PrintBoard(string[] pos)
         {
-            string[] pos = new string[9] { " ", " ", " ", " ", " ", " ", " ", " ", " "};
-            
-            
-            
+
             Console.WriteLine("     |     |    ");
-            Console.WriteLine("  "+pos[0]+ "  |  "+ pos[1] + "  |  " + pos[2]);
+            Console.WriteLine("  {0}  |  {1}  |  {2}  ", pos[6], pos[7], pos[8]);
             Console.WriteLine(" ____|_____|____");
             Console.WriteLine("     |     |    ");
-            Console.WriteLine("  "+ pos[3]+ "  |  "+ pos[4] + "  |  " + pos[5]);
+            Console.WriteLine("  {0}  |  {1}  |  {2}  ", pos[3], pos[4], pos[5]);
             Console.WriteLine(" ____|_____|____");
             Console.WriteLine("     |     |    ");
-            Console.WriteLine("  "+ pos[6]+ "  |  "+ pos[7] + "  |  " + pos[8]);
+            Console.WriteLine("  {0}  |  {1}  |  {2}  ", pos[0], pos[1], pos[2]);
             Console.WriteLine("     |     |    ");
             Console.WriteLine("");
 
-           
+        }
 
+        static void PositionKey()
+        {
+            Console.WriteLine("\nUse your NumPad!!!");
+            Console.WriteLine("     |     |    ");
+            Console.WriteLine("   7 |  8  | 9  ");
+            Console.WriteLine(" ____|_____|____");
+            Console.WriteLine("     |     |    ");
+            Console.WriteLine("   4 |  5  | 6  ");
+            Console.WriteLine(" ____|_____|____");
+            Console.WriteLine("     |     |    ");
+            Console.WriteLine("   1 |  2  | 3  ");
+            Console.WriteLine("     |     |    ");
+            Console.WriteLine("");
 
-        }  
-        
-        
+        }
     }
 }
